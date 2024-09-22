@@ -3,8 +3,9 @@ const app = express();
 const fs = require('fs');
 const path = require('path');
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public')); // Serve static files from the 'public' directory
 app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.static('public')); // Serve static files from the 'public' directory
+
 
 app.get('/api/notes', (req, res) => {
   fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
@@ -31,24 +32,6 @@ app.post('/api/notes', (req, res) => {
     });
   });
 });
-
-// app.put('/api/notes/:title', (req, res) => {
-//   const noteTitle = req.params.title;
-//   const updatedNote = req.body;
-//   fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
-//     if (err) {
-//       return res.status(500).json({ error: 'Failed to read notes' });
-//     }
-//     let notes = JSON.parse(data);
-//     notes = notes.map(note => note.title === noteTitle ? updatedNote : note);
-//     fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes, null, 2), (err) => {
-//       if (err) {
-//         return res.status(500).json({ error: 'Failed to update note' });
-//       }
-//       res.json(updatedNote);
-//     });
-//   });
-// });
 
 app.delete('/api/notes/:title', (req, res) => {
   const noteTitle = req.params.title;

@@ -76,9 +76,3 @@ body {
   padding: 20px;
   cursor: pointer;
 }
-.list-group-item .btn-danger {
-  margin-left: 10px;
-}
-.list-group-item .btn-primary {
-  margin-left: 10px;
-}
